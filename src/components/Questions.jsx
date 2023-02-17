@@ -1,14 +1,33 @@
-export default function Questions() {
+import { useEffect, useState } from "react";
+
+export default function Questions({
+  data, 
+  setTimeOut,
+  questionNumber,
+  setQuestionNumber}) {
+
+    const [question,setQuestion] = useState(null);
+    const [selectedAnswer, SetSelectedAnswer] = useState(null);
+    const [ClassName, SetClassName] = useState("answer");
+
+    useEffect(()=>{
+      setQuestion(data[questionNumber - 1])
+    },[data, questionNumber])
+
+    const AnswerClicked = e => {
+      SetSelectedAnswer(e)
+      SetClassName("active")
+    }
   return (
     <div className="QeA">
         <div className="question">
-            Qual é 5 * 5 ?
+           {question?.question}
         </div>
         <div className="answers">
-            <div className="answer wrong">10</div>
-            <div className="answer">10</div>
-            <div className="answer">10</div>
-            <div className="answer">10</div>
+          {question?.answers.map((element) => (
+            <div onClick={()=> AnswerClicked(e)}
+            className={selectedAnswer === element ? ClassName: "answer "}>{element.text}</div>
+          ))}
         </div>
     </div>
   )

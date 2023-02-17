@@ -61,6 +61,7 @@
   text-align: center;
   background: linear-gradient( #0e0124,#22074d);
   border: 1px solid white;
+  cursor: pointer;
 }
 .answer:hover, 
 .answer.active{
